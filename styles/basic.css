@@ -4,4 +4,16 @@ body {
 
 img.rounded {
   border-radius: 10%;
+  transition: all 0.3s ease-in-out;
+}
+
+img.rounded:hover {
+  border-radius: 2%;
+}
+
+.subtitle {
+  font-size: 1rem;
+  font-weight: 300;
+  color: #777;
+  font-style: italic;
 }
