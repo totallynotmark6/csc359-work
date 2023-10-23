@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello, world!</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="styles/basic.css">
+    </head>
+    <body>
+        <div id="app">
+            <!-- placeholder -->
+        </div>
+        <script src="react/react.js"></script>
+        <script src="react/react-dom.js"></script>
+        <script>
+            console.log('hello')
+            
+            // new fancy react 18+ way
+            const root = ReactDOM.createRoot(document.getElementById('app'))
+            root.render(React.createElement('h1', null, 'Hello, world!'))
+        </script>
+    </body>
+</html>
