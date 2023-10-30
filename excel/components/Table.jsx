@@ -34,14 +34,13 @@ export default function Table({ headers, initalData }) {
     } else {
       throw new Error(`Unsupported format: ${format}`);
     }
-    const URL = window.URL || window.webkitURL;
     const blob = new Blob([contents], { type: `text/${format}` });
     ev.target.href = URL.createObjectURL(blob);
     ev.target.download = `data.${format}`;
   }
-  
-    const downloadJSON = (ev) => download('json', ev);
-    const downloadCSV = (ev) => download('csv', ev);
+
+  const downloadJSON = (ev) => download('json', ev);
+  const downloadCSV = (ev) => download('csv', ev);
 
   const showEditor = (event) => {
     setEdit({
@@ -53,7 +52,7 @@ export default function Table({ headers, initalData }) {
   return (
     <div className='p-2'>
       <div className='text-center'>
-        <a href="data.json" onClick={downloadJSON} className='p-2 transition rounded bg-slate-800 hover:bg-slate-500 text-white m-4 cursor-pointer'>
+        <a href="data.json" onClick={downloadJSON} className='p-2 transition rounded bg-slate-800 hover:bg-red-500 text-white m-4 cursor-pointer'>
           Export JSON
         </a>
         <a href="data.csv" onClick={downloadCSV} className='p-2 transition rounded bg-slate-800 hover:bg-slate-500 text-white m-4 cursor-pointer'>
