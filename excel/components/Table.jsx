@@ -42,6 +42,11 @@ export default function Table({ headers, initalData }) {
   const downloadJSON = (ev) => download('json', ev);
   const downloadCSV = (ev) => download('csv', ev);
 
+  const importTSV = (contents) => {
+    const newData = contents.split('\n').map(row => row.split('\t'));
+    setData(newData);
+  }
+
   const showEditor = (event) => {
     setEdit({
       row: parseInt(event.target.dataset.row, 10),
@@ -52,6 +57,16 @@ export default function Table({ headers, initalData }) {
   return (
     <div className='p-2'>
       <div className='text-center'>
+        <a onClick={() => {
+          const contents = window.prompt('Paste your TSV data here');
+          if (contents) {
+            importTSV(contents);
+          }
+        }
+        } className='p-2 transition rounded bg-slate-800 hover:bg-slate-500 text-white m-4 cursor-pointer'>
+          Import TSV
+        </a>
+
         <a href="data.json" onClick={downloadJSON} className='p-2 transition rounded bg-slate-800 hover:bg-red-500 text-white m-4 cursor-pointer'>
           Export JSON
         </a>
@@ -77,7 +92,7 @@ export default function Table({ headers, initalData }) {
         </a>
       </div>
       <table className="border-collapse border border-slate-400 m-2 cursor-cell">
-        <thead className="bg-slate-200" onClick={sort}>
+        <thead className="bg-slate-200 dark:bg-slate-700" onClick={sort}>
           <tr>
             {headers.map((header, index) => {
               if (sortBy === index) {
@@ -91,7 +106,7 @@ export default function Table({ headers, initalData }) {
         </thead>
         <tbody onDoubleClick={showEditor}>
           {data.map((row, row_index) => (
-            <tr key={row_index} className='even:bg-slate-50' data-row={row_index} >
+            <tr key={row_index} className='even:bg-slate-50 dark:even:bg-slate-900' data-row={row_index} >
               {row.map((cell, cell_index) => {
                 const isEditing = edit && edit.row === row_index && edit.cell === cell_index;
                 if (isEditing) {
@@ -104,7 +119,7 @@ export default function Table({ headers, initalData }) {
                         setData(newData);
                         setEdit(null);
                       }}>
-                        <input type="text" defaultValue={cell} className='bg-red-400' autoFocus />
+                        <input type="text" defaultValue={cell} className='bg-red-400 dark:bg-red-600' autoFocus />
                       </form>
                     </td>
                   )
